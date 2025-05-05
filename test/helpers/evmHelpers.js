@@ -212,10 +212,53 @@ getCurrentAggregateReport = (_queryId, _value, _timestamp,_reporterPower) => {
 
 layerSign = (message, privateKey) => {
   // assumes message is bytesLike
-  messageHash = ethers.sha256(message)
-  signingKey = new ethers.SigningKey(privateKey)
+  messageHash = ethers.utils.sha256(message)
+  signingKey = new ethers.utils.SigningKey(privateKey)
   signature = signingKey.signDigest(messageHash)
   return signature
+}
+
+prepareOracleData = async (queryId, value, validators, powers, validatorCheckpoint) => {
+  blocky = await getBlock()
+  timestamp = (blocky.timestamp - 2) * 1000
+  aggregatePower = powers.reduce((a, b) => a + b, 0)
+  attestTimestamp = timestamp + 1000
+  previousTimestamp = 0
+  nextTimestamp = 0
+  lastConsensusTimestamp = timestamp
+  dataDigest = await getDataDigest(
+      queryId,
+      value,
+      timestamp,
+      aggregatePower,
+      previousTimestamp,
+      nextTimestamp,
+      validatorCheckpoint,
+      attestTimestamp,
+      lastConsensusTimestamp
+  )
+  valAddrs = validators.map(v => v.address)
+  currentValSetArray = await getValSetStructArray(valAddrs, powers)
+  sigs = []
+  for (i = 0; i < validators.length; i++) {
+    sigs.push(layerSign(dataDigest, validators[i].privateKey))
+  }
+  sigStructArray = await getSigStructArray(sigs)
+  oracleDataStruct = await getOracleDataStruct(
+      queryId,
+      value,
+      timestamp,
+      aggregatePower,
+      previousTimestamp,
+      nextTimestamp,
+      attestTimestamp,
+      lastConsensusTimestamp
+  )
+  return {
+    attestData: oracleDataStruct,
+    currentValidatorSet: currentValSetArray,
+    sigs: sigStructArray
+  }
 }
 
 module.exports = {
@@ -244,8 +287,7 @@ module.exports = {
   fromWei,
   expectThrow,
   sleep,
-  // takeSnapshot,
-  // impersonateAccount,
-  layerSign
+  layerSign,
+  prepareOracleData
 };
 
