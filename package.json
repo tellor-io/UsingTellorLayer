@@ -1,12 +1,16 @@
 {
-  "name": "usingtell",
+  "name": "usingtellorlayer",
   "version": "1.0.0",
+  "description": "",
   "main": "hardhat.config.js",
-  "scripts": {
-    "test": "npx hardhat test"
+  "directories": {
+    "test": "test"
   },
-  "author": "Tellor",
-  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
     "@nomiclabs/hardhat-ethers": "^2.0.4",
@@ -20,7 +24,6 @@
     "hardhat-gas-reporter": "^2.2.0",
     "web3": "^1.10.4"
   },
-  "dependencies": {
-    "chai": "^5.2.0"
-  }
+  "mocha": {},
+  "dependencies": {}
 }

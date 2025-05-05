@@ -1,21 +1,18 @@
 const web3 = require('web3');
-const { ethers, network } = require("hardhat");
+const { network, ethers} = require("hardhat");
 const BigNumber = ethers.BigNumber
 const BN = web3.utils.BN;
 const axios = require('axios')
-const { DirectSecp256k1HdWallet, Registry } = require('@cosmjs/proto-signing');
-const { GasPrice, StargateClient, SigningStargateClient } = require('@cosmjs/stargate');
 const os = require('os');
 const path = require('path');
 const fs = require('fs').promises;
-const { MsgRequestAttestations } = require('../../generated/layer/bridge/tx_pb.js');
 const { impersonateAccount, takeSnapshot } = require("@nomicfoundation/hardhat-network-helpers");
 
 const homeDirectory = os.homedir();
 const CHARLIE_MNEMONIC_FILE = path.join(homeDirectory, 'Desktop', 'charlie_mnemonic.txt');
 
 
-const hash = web3.utils.keccak256;
+const hash = ethers.utils.keccak256;
 var assert = require('assert');
 const abiCoder = new ethers.utils.AbiCoder();
 
