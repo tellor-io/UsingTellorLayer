@@ -32,14 +32,31 @@ contract PriceContract {
 ```
 
 ### Addresses:
-Find Tellor contract addresses [here](https://docs.tellor.io/layer-docs/using-tellor-data/integrating-tellor-data).
+Find Tellor contract addresses [here](https://docs.tellor.io/layer-docs/using-tellor-data/integrating-tellor-data#contract-addresses).
 
 ## Testing
 Open a git bash terminal and run this code:
 
 ```bash
 git clone https://github.com/tellor-io/UsingTellorLayer.git
-cd YoloTellorUser
+cd UsingTellorLayer
 npm i
 npx hardhat test
 ```
+
+## Secure Integrations
+
+For secure integrations, refer to the [tellor docs](https://docs.tellor.io/layer-docs/using-tellor-data/integrating-tellor-data#contract-addresses). Also, see example integrations in the [SampleLayerUser repo](https://github.com/tellor-io/SampleLayerUser).
+
+## Maintainers
+@themandalore
+@brendaloya
+
+## How to Contribute
+Check out our issues log here on Github out in our [Discord](https://discord.gg/teAMSZAfJZ)
+
+## Contributors
+This repository is maintained by the Tellor team - www.tellor.io
+
+## Copyright
+Tellor Inc. 2025
