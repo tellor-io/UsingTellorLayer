@@ -38,7 +38,7 @@ Find Tellor contract addresses [here](https://docs.tellor.io/layer-docs/using-te
 Open a git bash terminal and run this code:
 
 ```bash
-git clone https://github.com/tellor-io/YoloTellorUser.git
+git clone https://github.com/tellor-io/UsingTellorLayer.git
 cd YoloTellorUser
 npm i
 npx hardhat test
