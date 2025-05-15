@@ -2,19 +2,19 @@
 
 Use this package to install the Tellor user contracts and integrate Tellor into your contracts.
 
-Once installed this will allow your contracts to inherit the functions from IBlobstreamO.
+Once installed this will allow your contracts to inherit the functions from ITellorDataBridge.
 
 ## How to Use
 
 ```solidity
-import "usingtellorlayer/contracts/interfaces/IBlobstreamO.sol";
+import "usingtellorlayer/contracts/interfaces/ITellorDataBridge.sol";
 
 contract PriceContract {
-    IBlobstreamO public blobstream;
+    ITellorDataBridge public dataBridge;
     uint256 public price;
 
-    constructor(address _blobstreamO) {
-        blobstream = IBlobstreamO(_blobstreamO);
+    constructor(address _dataBridge) {
+        dataBridge = ITellorDataBridge(_dataBridge);
     }
 
     function resolveMarket(
@@ -23,7 +23,7 @@ contract PriceContract {
         Signature[] calldata _sigs
     ) public {
         // verify that data came from tellor chain
-        blobstream.verifyOracleData(_attestData, _currentValidatorSet, _sigs);
+        dataBridge.verifyOracleData(_attestData, _currentValidatorSet, _sigs);
         // NOTE: This is a simplified example. More security checks should be done
         // in production to ensure data integrity.
         price = abi.decode(_attestData.report.value, (uint256));
