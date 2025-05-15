@@ -5,7 +5,7 @@ const abiCoder = new ethers.utils.AbiCoder();
 
 describe("YoloTellorUser - Function Tests", async function () {
 
-    let blobstream, user, accounts, guardian, initialPowers, initialValAddrs, valCheckpoint;
+    let dataBridge, user, accounts, guardian, initialPowers, initialValAddrs, valCheckpoint;
     let val1, val2, val3;
     const UNBONDING_PERIOD = 86400 * 7 * 3; // 3 weeks
 
@@ -23,15 +23,15 @@ describe("YoloTellorUser - Function Tests", async function () {
         valTimestamp = (blocky.timestamp - 2) * 1000
         newValHash = await h.calculateValHash(initialValAddrs, initialPowers)
         valCheckpoint = h.calculateValCheckpoint(newValHash, threshold, valTimestamp)
-        // deploy blobstream
-        blobstream = await ethers.deployContract("BlobstreamO", [guardian.address])
-        await blobstream.init(threshold, valTimestamp, UNBONDING_PERIOD, valCheckpoint)
+        // deploy dataBridge
+        dataBridge = await ethers.deployContract("TellorDataBridge", [guardian.address])
+        await dataBridge.init(threshold, valTimestamp, UNBONDING_PERIOD, valCheckpoint)
         // deploy user
-        user = await ethers.deployContract("YoloTellorUser", [blobstream.address])
+        user = await ethers.deployContract("YoloTellorUser", [dataBridge.address])
     });
 
     it("constructor", async function () {
-        assert.equal(await user.blobstreamO(), await blobstream.address)
+        assert.equal(await user.dataBridge(), await dataBridge.address)
     })
 
     it("updateOracleData", async function () {

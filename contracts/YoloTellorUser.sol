@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.19;
 
-import "./interfaces/IBlobstreamO.sol";
+import "./interfaces/ITellorDataBridge.sol";
 
 contract YoloTellorUser {
-    IBlobstreamO public blobstreamO;
+    ITellorDataBridge public dataBridge;
     OracleData[] public oracleData;
 
     struct OracleData {
@@ -12,8 +12,8 @@ contract YoloTellorUser {
         uint256 timestamp; // aggregate report timestamp
     }
 
-    constructor(address _blobstreamO) {
-        blobstreamO = IBlobstreamO(_blobstreamO);
+    constructor(address _dataBridge) {
+        dataBridge = ITellorDataBridge(_dataBridge);
     }
 
     function updateOracleData(
@@ -21,7 +21,7 @@ contract YoloTellorUser {
         Validator[] calldata _currentValidatorSet,
         Signature[] calldata _sigs
     ) external {
-        blobstreamO.verifyOracleData(_attestData, _currentValidatorSet, _sigs);
+        dataBridge.verifyOracleData(_attestData, _currentValidatorSet, _sigs);
         uint256 _value = abi.decode(_attestData.report.value, (uint256));
         oracleData.push(OracleData(
             _value, 
