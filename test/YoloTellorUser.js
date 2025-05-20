@@ -1,5 +1,5 @@
 const { ethers } = require("hardhat");
-const h = require("./helpers/evmHelpers");
+const h = require("../src/helpers/evmHelpers");
 var assert = require('assert');
 const abiCoder = new ethers.utils.AbiCoder();
 

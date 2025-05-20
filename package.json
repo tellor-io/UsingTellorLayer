@@ -2,7 +2,7 @@
   "name": "usingtellorlayer",
   "version": "1.0.2",
   "description": "",
-  "main": "hardhat.config.js",
+  "main": "src/index.js",
   "directories": {
     "test": "test"
   },
@@ -23,5 +23,14 @@
     "hardhat-gas-reporter": "^2.2.0",
     "web3": "^1.10.4"
   },
-  "mocha": {}
+  "mocha": {},
+  "exports": {
+    ".": "./src/index.js",
+    "./helpers": "./src/helpers/evmHelpers.js",
+    "./contracts": "./contracts/*"
+  },
+  "files": [
+    "src/**/*",
+    "contracts/**/*"
+  ]
 }
