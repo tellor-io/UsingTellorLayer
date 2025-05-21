@@ -20,12 +20,6 @@
     "hardhat": "^2.22.3"
   },
   "mocha": {},
-  "exports": {
-    ".": "./src/index.js",
-    "./helpers": "./src/helpers/evmHelpers.js",
-    "./contracts": "./contracts/*",
-    "./artifacts": "./artifacts/*"
-  },
   "files": [
     "src/**/*",
     "contracts/**/*",
