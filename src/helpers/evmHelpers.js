@@ -258,6 +258,7 @@ module.exports = {
   expectThrow,
   sleep,
   layerSign,
-  prepareOracleData
+  prepareOracleData,
+  abiCoder
 };
 
