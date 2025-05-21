@@ -23,10 +23,12 @@
   "exports": {
     ".": "./src/index.js",
     "./helpers": "./src/helpers/evmHelpers.js",
-    "./contracts": "./contracts/*"
+    "./contracts": "./contracts/*",
+    "./artifacts": "./artifacts/*"
   },
   "files": [
     "src/**/*",
-    "contracts/**/*"
+    "contracts/**/*",
+    "artifacts/**/*"
   ]
 }
