@@ -1,10 +1,10 @@
 const { ethers, network } = require("hardhat");
-const hash = ethers.utils.keccak256;
+const hash = ethers.keccak256;
 var assert = require('assert');
 // const { impersonateAccount, takeSnapshot } = require("@nomicfoundation/hardhat-network-helpers");
 
 var assert = require('assert');
-const abiCoder = new ethers.utils.AbiCoder();
+const abiCoder = new ethers.AbiCoder();
 
 const takeFifteen = async () => {
   await advanceTime(60 * 18);
@@ -40,7 +40,7 @@ function tob32(n) {
 }
 
 function uintTob32(n){
-  let vars = ethers.utils.hexlify(n)
+  let vars = ethers.hexlify(n)
   vars = vars.slice(2)
   while(vars.length < 64){
     vars = "0" + vars
@@ -50,7 +50,7 @@ function uintTob32(n){
 }
 
 function bytes(n){
-  return ethers.utils.hexlify(n)
+  return ethers.hexlify(n)
 }
 
 function getBlock(){
@@ -58,11 +58,11 @@ function getBlock(){
 }
 
 function toWei(n){
-  return ethers.utils.parseEther(n)
+  return ethers.parseEther(n)
 }
 
 function fromWei(n){
-  return ethers.utils.formatEther(n)
+  return ethers.formatEther(n)
 }
 
 function sleep(s) {
@@ -184,9 +184,9 @@ getCurrentAggregateReport = (_queryId, _value, _timestamp,_reporterPower) => {
 
 layerSign = (message, privateKey) => {
   // assumes message is bytesLike
-  messageHash = ethers.utils.sha256(message)
-  signingKey = new ethers.utils.SigningKey(privateKey)
-  signature = signingKey.signDigest(messageHash)
+  messageHash = ethers.sha256(message)
+  signingKey = new ethers.SigningKey(privateKey)
+  signature = signingKey.sign(messageHash)
   return signature
 }
 
