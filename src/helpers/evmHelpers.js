@@ -1,18 +1,10 @@
-const web3 = require('web3');
 const { ethers, network } = require("hardhat");
-const hash = ethers.utils.keccak256;
+const hash = ethers.keccak256;
 var assert = require('assert');
 // const { impersonateAccount, takeSnapshot } = require("@nomicfoundation/hardhat-network-helpers");
 
 var assert = require('assert');
-const abiCoder = new ethers.utils.AbiCoder();
-
-advanceTimeAndBlock = async (time) => {
-  await advanceTime(time);
-  await advanceBlock();
-  console.log("Time Travelling...");
-  return Promise.resolve(web3.eth.getBlock("latest"));
-};
+const abiCoder = new ethers.AbiCoder();
 
 const takeFifteen = async () => {
   await advanceTime(60 * 18);
@@ -22,26 +14,6 @@ advanceTime = async (time) => {
   await network.provider.send("evm_increaseTime", [time])
   await network.provider.send("evm_mine")
 }
-
-advanceBlock = () => {
-  return new Promise((resolve, reject) => {
-    web3.currentProvider.send(
-      {
-        jsonrpc: "2.0",
-        method: "evm_mine",
-        id: new Date().getTime(),
-      },
-      (err, result) => {
-        if (err) {
-          return reject(err);
-        }
-        const newBlockHash = web3.eth.getBlock("latest").hash;
-
-        return resolve(newBlockHash);
-      }
-    );
-  });
-};
 
 async function expectThrow(promise) {
   try {
@@ -67,30 +39,30 @@ function tob32(n) {
   return ethers.formatBytes32String(n)
 }
 
-function uintTob32(n) {
-  let vars = web3.toHex(n)
+function uintTob32(n){
+  let vars = ethers.hexlify(n)
   vars = vars.slice(2)
-  while (vars.length < 64) {
+  while(vars.length < 64){
     vars = "0" + vars
   }
   vars = "0x" + vars
   return vars
 }
 
-function bytes(n) {
-  return web3.toHex(n)
+function bytes(n){
+  return ethers.hexlify(n)
 }
 
-function getBlock() {
+function getBlock(){
   return ethers.provider.getBlock()
 }
 
-function toWei(n) {
-  return web3.toWei(n, "ether")
+function toWei(n){
+  return ethers.parseEther(n)
 }
 
-function fromWei(n) {
-  return web3.fromWei(n)
+function fromWei(n){
+  return ethers.formatEther(n)
 }
 
 function sleep(s) {
@@ -212,9 +184,9 @@ getCurrentAggregateReport = (_queryId, _value, _timestamp,_reporterPower) => {
 
 layerSign = (message, privateKey) => {
   // assumes message is bytesLike
-  messageHash = ethers.utils.sha256(message)
-  signingKey = new ethers.utils.SigningKey(privateKey)
-  signature = signingKey.signDigest(messageHash)
+  messageHash = ethers.sha256(message)
+  signingKey = new ethers.SigningKey(privateKey)
+  signature = signingKey.sign(messageHash)
   return signature
 }
 
@@ -280,14 +252,13 @@ module.exports = {
   bytes,
   getBlock,
   advanceTime,
-  advanceBlock,
-  advanceTimeAndBlock,
   takeFifteen,
   toWei,
   fromWei,
   expectThrow,
   sleep,
   layerSign,
-  prepareOracleData
+  prepareOracleData,
+  abiCoder
 };
 

@@ -1,7 +1,7 @@
 const { ethers } = require("hardhat");
-const h = require("./helpers/evmHelpers");
+const h = require("../src/helpers/evmHelpers");
 var assert = require('assert');
-const abiCoder = new ethers.utils.AbiCoder();
+const abiCoder = new ethers.AbiCoder();
 
 describe("YoloTellorUser - Function Tests", async function () {
 
@@ -27,11 +27,11 @@ describe("YoloTellorUser - Function Tests", async function () {
         dataBridge = await ethers.deployContract("TellorDataBridge", [guardian.address])
         await dataBridge.init(threshold, valTimestamp, UNBONDING_PERIOD, valCheckpoint)
         // deploy user
-        user = await ethers.deployContract("YoloTellorUser", [dataBridge.address])
+        user = await ethers.deployContract("YoloTellorUser", [dataBridge.getAddress()])
     });
 
     it("constructor", async function () {
-        assert.equal(await user.dataBridge(), await dataBridge.address)
+        assert.equal(await user.dataBridge(), await dataBridge.getAddress())
     })
 
     it("updateOracleData", async function () {
