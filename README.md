@@ -1,3 +1,5 @@
+[![Tests](https://github.com/tellor-io/UsingTellorLayer/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/tellor-io/UsingTellorLayer/actions/workflows/tests.yml)
+
 # UsingTellorLayer
 
 Use this package to install the Tellor user contracts and integrate Tellor into your contracts.
