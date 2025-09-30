@@ -10,6 +10,9 @@ describe("YoloTellorUser - Function Tests", async function () {
     // for tellor palmito testnet, use "layertest-4"
     const TELLOR_CHAIN_ID = "layertest-4";
     const UNBONDING_PERIOD = 86400 * 7 * 3; // 3 weeks
+    const QUERY_DATA_ARGS = abiCoder.encode(["string", "string"], ["eth", "usd"])
+    const QUERY_DATA = abiCoder.encode(["string"], ["SpotPrice", QUERY_DATA_ARGS])
+    const QUERY_ID = ethers.keccak256(QUERY_DATA)
 
     beforeEach(async function () {
         // init accounts
@@ -21,7 +24,7 @@ describe("YoloTellorUser - Function Tests", async function () {
         dataBridge = await ethers.deployContract("TellorDataBridge", [guardian.address, validatorSet.domainSeparator])
         await dataBridge.init(validatorSet.powerThreshold, validatorSet.timestamp, UNBONDING_PERIOD, validatorSet.checkpoint)
         // deploy user
-        user = await ethers.deployContract("YoloTellorUser", [dataBridge.getAddress()])
+        user = await ethers.deployContract("YoloTellorUser", [dataBridge.getAddress(), QUERY_ID])
     });
 
     it("constructor", async function () {
@@ -29,12 +32,10 @@ describe("YoloTellorUser - Function Tests", async function () {
     })
 
     it("updateOracleData", async function () {
-        querydata = abiCoder.encode(["string"], ["myquery"])
-        queryId = h.hash(querydata)
         value = abiCoder.encode(["uint256"], [2000])
-        const { attestData, currentValidatorSet, sigs } = await h.prepareOracleData(queryId, value, validatorSet.wallets, validatorSet.powers, validatorSet.checkpoint)
+        const { attestData, currentValidatorSet, sigs } = await h.prepareOracleData(QUERY_ID, value, validatorSet.wallets, validatorSet.powers, validatorSet.checkpoint)
         await user.updateOracleData(attestData, currentValidatorSet, sigs)
-        currentOracleData = await user.getCurrentOracleData()
+        currentOracleData = await user.getCurrentData()
         assert.equal(currentOracleData.value, 2000)
     })
 })
