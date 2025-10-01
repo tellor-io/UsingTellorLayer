@@ -300,9 +300,7 @@ function layerSign(message, privateKey) {
  * Prepares oracle data for relaying to a user contract.
  * @param {string} queryId - The query ID for the oracle data
  * @param {string} value - The encoded value to be reported
- * @param {Array} validators - Array of validator objects with address and privateKey
- * @param {Array} powers - Array of validator powers
- * @param {string} validatorCheckpoint - The validator checkpoint hash
+ * @param {Object} validatorSet - Object from createTellorValset() containing wallets, powers, checkpoint
  * @param {Object} overrides - Optional overrides for any calculated values
  * @param {number} overrides.aggregateTimestamp - Custom aggregate timestamp (default: (block.timestamp - 2) * 1000)
  * @param {number} overrides.aggregatePower - Custom aggregate power (default: sum of powers)
@@ -313,7 +311,10 @@ function layerSign(message, privateKey) {
  * @param {boolean} overrides.ignoreInvariantChecks - Whether to skip invariant checks (default: false)
  * @returns {Object} Object containing attestData, currentValidatorSet, and sigs
  */
-async function prepareOracleData(queryId, value, validators, powers, validatorCheckpoint, overrides = {}) {
+async function prepareOracleData(queryId, value, validatorSet, overrides = {}) {
+  const validators = validatorSet.wallets;
+  const powers = validatorSet.powers;
+  const validatorCheckpoint = validatorSet.checkpoint;
   const blocky = await getBlock();
   
   // Calculate defaults
@@ -508,7 +509,7 @@ async function createTellorValset({
   const api = {
     structArray() {
       return data.validators.map(v => ({
-        address: v.wallet.address,
+        addr: v.wallet.address,
         power: v.power,
       }));
     },

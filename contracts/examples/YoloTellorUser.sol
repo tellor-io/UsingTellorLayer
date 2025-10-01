@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.19;
 
-import "./interfaces/ITellorDataBridge.sol";
+import "../interfaces/ITellorDataBridge.sol";
 
 // This contract shows a baseline oracle user that just verifies the data is valid tellor data
 // and stores the data for retrieval. It should never be used in production.
