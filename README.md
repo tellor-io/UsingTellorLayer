@@ -2,9 +2,11 @@
 
 # UsingTellorLayer
 
-Use this package to install the Tellor user contracts, test helper functions, and integrate Tellor into your contracts.
+Use this package to install the Tellor user contracts and test helper functions, and to integrate Tellor into your contracts.
 
 ## How to Use
+
+Use this package with your own npm project.
 
 ### Install
 
@@ -41,8 +43,8 @@ contract PriceContract {
 ### Addresses:
 Find Tellor contract addresses [here](https://docs.tellor.io/tellor/using-tellor-data/contracts-reference).
 
-## Testing
-Open a git bash terminal and run this code:
+## Testing this Repo
+Open a terminal and run:
 
 ```bash
 git clone https://github.com/tellor-io/UsingTellorLayer.git
