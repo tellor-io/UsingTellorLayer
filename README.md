@@ -1,11 +1,20 @@
+[![Tests](https://github.com/tellor-io/UsingTellorLayer/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/tellor-io/UsingTellorLayer/actions/workflows/tests.yml)
+
 # UsingTellorLayer
 
-Use this package to install the Tellor user contracts and integrate Tellor into your contracts.
-
-Once installed this will allow your contracts to inherit the functions from ITellorDataBridge.
+Use this package to install the Tellor user contracts and test helper functions, and to integrate Tellor into your contracts.
 
 ## How to Use
 
+Use this package with your own npm project.
+
+### Install
+
+```bash
+npm install usingtellorlayer
+```
+
+### Usage
 ```solidity
 import "usingtellorlayer/contracts/interfaces/ITellorDataBridge.sol";
 
@@ -17,7 +26,7 @@ contract PriceContract {
         dataBridge = ITellorDataBridge(_dataBridge);
     }
 
-    function resolveMarket(
+    function updateOracleData(
         OracleAttestationData calldata _attestData,
         Validator[] calldata _currentValidatorSet,
         Signature[] calldata _sigs
@@ -32,10 +41,10 @@ contract PriceContract {
 ```
 
 ### Addresses:
-Find Tellor contract addresses [here](https://docs.tellor.io/layer-docs/using-tellor-data/integrating-tellor-data#contract-addresses).
+Find Tellor contract addresses [here](https://docs.tellor.io/tellor/using-tellor-data/contracts-reference).
 
-## Testing
-Open a git bash terminal and run this code:
+## Testing this Repo
+Open a terminal and run:
 
 ```bash
 git clone https://github.com/tellor-io/UsingTellorLayer.git
@@ -46,7 +55,7 @@ npx hardhat test
 
 ## Secure Integrations
 
-For secure integrations, refer to the [tellor docs](https://docs.tellor.io/layer-docs/using-tellor-data/integrating-tellor-data#contract-addresses). Also, see example integrations in the [SampleLayerUser repo](https://github.com/tellor-io/SampleLayerUser).
+For secure integrations, refer to the [tellor docs](https://docs.tellor.io/tellor/using-tellor-data/integrating-tellor-data). Also, see example integrations in the [SampleLayerUser repo](https://github.com/tellor-io/SampleLayerUser).
 
 ## Maintainers
 @themandalore
