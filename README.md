@@ -4,9 +4,17 @@
 
 Use this package to install the Tellor user contracts and test helper functions, and to integrate Tellor into your contracts.
 
+## Contents
+
+- `contracts/interfaces/ITellorDataBridge.sol` - The TellorDataBridge interface
+- `contracts/testing/DataBankPlayground.sol` - A testing contract for rapid prototyping with Tellor oracle data
+- `contracts/interfaces/IDataBankPlayground.sol` - The DataBankPlayground interface
+- `contracts/bridge/TellorDataBridge.sol` - The TellorDataBridge contract
+- `src/helpers/evmHelpers.js` - Helper functions for testing
+
 ## How to Use
 
-Use this package with your own npm project.
+Use this package with your own npm project. See the [SampleLayerUser repo](https://github.com/tellor-io/SampleLayerUser) for usage examples.
 
 ### Install
 

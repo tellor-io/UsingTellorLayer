@@ -1,0 +1,145 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IDataBankPlayground",
+  "sourceName": "contracts/interfaces/IDataBankPlayground.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_queryId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAggregateByIndex",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "value",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "power",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "aggregateTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "attestationTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "relayTimestamp",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IDataBankPlayground.AggregateData",
+          "name": "_aggregateData",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_queryId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getAggregateValueCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_queryId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getCurrentAggregateData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "value",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint256",
+              "name": "power",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "aggregateTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "attestationTimestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "relayTimestamp",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IDataBankPlayground.AggregateData",
+          "name": "_aggregateData",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "_queryId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_value",
+          "type": "bytes"
+        }
+      ],
+      "name": "updateOracleDataPlayground",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
