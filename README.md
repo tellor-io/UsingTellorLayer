@@ -70,7 +70,7 @@ For secure integrations, refer to the [tellor docs](https://docs.tellor.io/tello
 @brendaloya
 
 ## How to Contribute
-Check out our issues log here on Github out in our [Discord](https://discord.gg/teAMSZAfJZ)
+Check out our issues log here on Github out in our [Discord](https://discord.com/invite/tellor)
 
 ## Contributors
 This repository is maintained by the Tellor team - www.tellor.io
